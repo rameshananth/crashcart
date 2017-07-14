@@ -192,12 +192,12 @@ Boiler plate code to dynamically make a library. Do not modify.
 2. The entrypoint needs to be bound through a closure
 *************************************************************************************************************************************/
 var _funcs;
-function makeWaterFall(dialogName,entryPoint){
+function makeWaterFall(dialogName,entryPoint,intentName){
 	return [
 		function(session,args,next){
-			logThis("Hi");
-			logThis(session);
-			logThis("In "+dialogName+" dialog"+session);
+			//logThis("Hi");
+			//logThis(session);
+			logThis(session.id+",Entering:"+dialogName+",TriggeredBy:"+intentName);
 			//Save the global intent to the conversation data
 			session.conversationData.intent=args.intent;
 			session.beginDialog(entryPoint.name,entryPoint.parameters);
@@ -210,7 +210,7 @@ function makeWaterFall(dialogName,entryPoint){
 }
 
 for(i=0;i<_mapping.length;i++){
-	_funcs=makeWaterFall(lib.name+":"+_mapping[i].dialogName,_mapping[i].entryPoint);
+	_funcs=makeWaterFall(lib.name+":"+_mapping[i].dialogName,_mapping[i].entryPoint,_mapping[i].intentName);
 	lib.dialog(_mapping[i].dialogName,_funcs).triggerAction({matches: _mapping[i].intentName});
 }
 

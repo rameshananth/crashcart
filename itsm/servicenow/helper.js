@@ -9,7 +9,7 @@ lib.dialog('/GetTickets',[
 		console.log("In the ServiceNow:/GetTickets function");
 		var uName=session.message.address.user.name;
 		var Snow=new serviceNow(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
-		console.log(Snow);
+		//console.log(Snow);
 		var tickets;
 		var arName=session.message.address.user.name.split(' ');
 		Snow.getRecords(
@@ -35,8 +35,8 @@ lib.dialog('/GetTicket',[
 			Remember to endConversation at the handler function
 			*/
 			console.log("In the ServiceNow:/GetTicket function");
-			console.log(args);
-			console.log("Finding ticket:"+args.ticket_number);
+			//console.log(args);
+			//console.log("Finding ticket:"+args.ticket_number);
 			var uName=session.message.address.user.name;
 			var Snow=new serviceNow(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
 			var tickets;

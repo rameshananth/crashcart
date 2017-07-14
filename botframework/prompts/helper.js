@@ -32,10 +32,7 @@ lib.dialog('/GetConfirm',[
     builder.Prompts.confirm(session,args.message);
   },
   function(session,result){
-    console.log('Result returned from MSBotFramework:/GetConfirm function is in variable: response'
-                +'Result is:'+result.response
-                );
-	if(result.response){
+        if(result.response){
 		session.endDialogWithResult({response:result.response,resumed:null,success:true});	
 	}
 	else{
@@ -55,9 +52,6 @@ lib.dialog('/GetText',[
   },
   function(session,result){
     var sResult='response.'+session.dialogData.returnVariable;
-    console.log('Result returned from MSBotFramework:/GetText function is in variable: response'
-                +'Result is:'+result.response
-               );
     var map={}
     map['response']=result.response;
     map['resumed']=null;
@@ -73,28 +67,28 @@ lib.dialog('/CheckPrereqs',[
     session.beginDialog(args.check.name,args.check.parameters);
   },
   function(session,result){
-    logThis(session.dialogData.args);
+    //logThis(session.dialogData.args);
     if('persistResponse' in session.dialogData.args.check.parameters){
-	    console.log("persistResponse exists");
+	    //console.log("persistResponse exists");
 	    if('persistVariable' in session.dialogData.args.check.parameters){
-		    console.log("persistVariable exists");
+		    //console.log("persistVariable exists");
 		    if(typeof session.dialogData.args.check.parameters.persistVariable!=undefined){
 			    var sVname=session.dialogData.args.check.parameters.persistVariable;
-			    console.log("persistVariable refers to "+sVname);
-			    console.log("persisting the response "+result.response+" to session.conversationData."+sVname);
+			    //console.log("persistVariable refers to "+sVname);
+			    //console.log("persisting the response "+result.response+" to session.conversationData."+sVname);
 			    session.conversationData[sVname]=result.response;
-			    logThis(session.conversationData);
+			    //logThis(session.conversationData);
 		    }
 		    else{
-			    console.log("persistVariable is undefined");
+			    //console.log("persistVariable is undefined");
 		    }
         		
 	    }
 	    else{
-		    console.log("persistVariable is missing");
+		    //console.log("persistVariable is missing");
 	    }
     }else{
-	    console.log("persistResponse is missing");
+	    //console.log("persistResponse is missing");
     }
 		  
     if(result.success==true){

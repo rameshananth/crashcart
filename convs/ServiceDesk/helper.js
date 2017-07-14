@@ -152,15 +152,28 @@ var gjGetTicketStatusConv={
 	}
 };
 
+var gjGreet={
+	name:"MSBotFramework:/SendMessage",
+	parameters:{
+		message:sGreeting
+	}
+};
+
 //If you have an Update request
 var _mapping=[
-	{intentName: 'ServiceDesk.Update',
-	 dialogName: '/GetUpdate',
-	 entryPoint:gjGetTicketStatusConv
+	{
+		intentName: 'ServiceDesk.Update',
+	 	dialogName: '/GetUpdate',
+	 	entryPoint:gjGetTicketStatusConv
+	},
+	{
+	 	intentName: 'ServiceDesk.Greet',
+		dialogName: '/Greet',
+		entryPoint:gjGreet
 	}
 ];
 
-
+/*
 lib.dialog('/Greet',[
 function(session,args,next){
 	logThis("Debug:In the ServiceDesk.Greet dialog");
@@ -170,6 +183,7 @@ function(session,args,next){
 	//startProactiveDialog(endUser);
 }
 ]).triggerAction({matches:'ServiceDesk.Greet'});
+*/
 
 /************************************************************************************************************************************
 

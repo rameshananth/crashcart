@@ -122,6 +122,14 @@ lib.dialog('/CheckPrereqs',[
   }
 ]);
 
+lib.dialog('/SendMessage',[
+	function(session,args,next){
+		console.log("In the MSBotFramework:/SendMessage function");
+                session.send(session,args.message);
+		session.endDialog();
+	}
+]);
+
 module.exports.createLibrary = function () {
     return lib.clone();
 };

@@ -33,6 +33,7 @@ bot.set('persistConversationData',false);
 bot.library(require('./itsm/servicenow/helper').createLibrary());
 bot.library(require('./botframework/prompts/helper').createLibrary());
 bot.library(require('./convs/ServiceDesk/helper').createLibrary());
+bot.library(require('./convs/PrintIssues/helper').createLibrary());
 
 //Set the LUIS endpoint model and restrict calls to it within the dialog
 var luisModel = process.env.LUIS_ENDPOINT;

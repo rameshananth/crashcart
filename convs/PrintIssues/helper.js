@@ -192,7 +192,7 @@ var _mapping=[
 	{
 	 	intentName: 'ServiceDesk.PrintIssue',
 		dialogName: '/AcknowledgePrintIssue',
-		entryPoint:gjGreet
+		entryPoint:gjStartTriage
 	}
 ];
 

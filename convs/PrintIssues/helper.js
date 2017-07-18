@@ -153,10 +153,37 @@ var gjGetTicketStatusConv={
 	}
 };
 
-var gjGreet={
-	name:"MSBotFramework:/SendMessage",
+var gjCheckIfTriageOK={
+	name:"MSBotFramework:/GetConfirm",
 	parameters:{
 		message:sGreeting
+	}
+};
+
+var gjGetUsersMachineName={
+	name:"MSBotFramework:/GetText",
+	parameters:{
+		message:"Please enter the name of the laptop/desktop from which you are attempting to print"
+	}
+};
+
+
+
+var gjStartTriage={
+	name:"MSBotFramework:/CheckPrereqs",
+	parameters:{
+		check:{
+			name:gjCheckIfTriageOK.name,
+			parameters:gjCheckIfTriageOK.parameters
+		},
+		success:{
+			name:gjGetUsersMachineName.name,
+			parameters:gjGetUsersMachineName.parameters
+		},
+		failure:{
+			name:gjNewTicketConv.name,
+			parameters:gjNewTicketConv.parameters
+		}
 	}
 };
 

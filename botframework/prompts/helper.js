@@ -16,6 +16,7 @@ lib.dialog('/GetEntity',[
 		The entityName is passed on as an argument parameter: entityName
 		You can persist this variable by making it part of a checkPrereqs function
 		*/
+		console.log(session.message.address.conversation.id+",Entering:MSBotFramework:/GetEntity");
 		var eVar=builder.EntityRecognizer.findEntity(session.conversationData.intent.entities, args.entityName);
 		if(eVar){
 			session.endDialogWithResult({response:eVar.entity,success:true});
@@ -27,8 +28,8 @@ lib.dialog('/GetEntity',[
 ]);
 
 lib.dialog('/GetConfirm',[
-  function(session,args,next){
-    console.log("In the MSBotFramework:/GetConfirm function");
+  function(session,args,next){	  
+    console.log(session.message.address.conversation.id+",Entering:MSBotFramework:/GetConfirm");
     builder.Prompts.confirm(session,args.message);
   },
   function(session,result){
@@ -45,7 +46,7 @@ lib.dialog('/GetConfirm',[
 
 lib.dialog('/GetText',[
   function(session,args,next){
-    console.log("In the MSBotFramework:/GetText function");
+    console.log(session.message.address.conversation.id+",Entering:MSBotFramework:/GetText");
     //console.log("The return variable is:"+args.returnVariable);
     session.dialogData.returnVariable=args.returnVariable;
     builder.Prompts.text(session,args.message);
@@ -62,7 +63,7 @@ lib.dialog('/GetText',[
 
 lib.dialog('/CheckPrereqs',[
   function(session,args,next){
-    console.log("In the MSBotFramework:/CheckPrereqs function");
+    console.log(session.message.address.conversation.id+",Entering:MSBotFramework:/CheckPrereqs");
     session.dialogData.args=args;
     session.beginDialog(args.check.name,args.check.parameters);
   },
@@ -118,7 +119,7 @@ lib.dialog('/CheckPrereqs',[
 
 lib.dialog('/SendMessage',[
 	function(session,args,next){
-		console.log("In the MSBotFramework:/SendMessage function");
+		console.log(session.message.address.conversation.id+",Entering:MSBotFramework:/SendMessage");
                 session.send(args.message);
 		session.endDialog();
 	}

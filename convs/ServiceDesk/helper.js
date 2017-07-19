@@ -204,7 +204,7 @@ function makeWaterFall(dialogName,entryPoint,intentName){
 			session.beginDialog(entryPoint.name,entryPoint.parameters);
 		},
 		function(session,results){
-			logThis("Ending "+dialogName+" dialog");
+			logThis(session.message.address.conversation.id+",Closing:"+dialogName);
 			session.endConversation();
 		}
 		];

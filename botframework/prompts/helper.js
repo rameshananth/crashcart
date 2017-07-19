@@ -93,24 +93,24 @@ lib.dialog('/CheckPrereqs',[
     }
 		  
     if(result.success==true){
-      console.log("The Check function returned success");
+      //console.log("The Check function returned success");
       if(!session.dialogData.args.success.name){
-        console.log("But no success function was defined, so returning with results");
+        //console.log("But no success function was defined, so returning with results");
         session.endDialogWithResult({response:result.response,success:true});
       }
       else{
-        console.log("Invoking the success function");
+        //console.log("Invoking the success function");
         session.beginDialog(session.dialogData.args.success.name,session.dialogData.args.success.parameters);
       }
     }
     else{
-      console.log("The Check function returned failure");
+      //console.log("The Check function returned failure");
       if(!session.dialogData.args.failure.name){
-        console.log("But no failure function was defined, so returning with results");
+        //console.log("But no failure function was defined, so returning with results");
         session.endDialogWithResult({response:result.response,success:false});
       }
       else{
-        console.log("Invoking the failure function");
+        //console.log("Invoking the failure function");
         session.beginDialog(session.dialogData.args.failure.name,session.dialogData.args.failure.parameters);
       }
     }

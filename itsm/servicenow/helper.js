@@ -6,7 +6,7 @@ console.log(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_
 var lib=new builder.Library('ServiceNow');
 lib.dialog('/GetTickets',[
 	function(session,args,next){
-		console.log("In the ServiceNow:/GetTickets function");
+		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/GetTickets");
 		var uName=session.message.address.user.name;
 		var Snow=new serviceNow(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
 		//console.log(Snow);
@@ -34,7 +34,7 @@ lib.dialog('/GetTicket',[
 			Looks up a ticketnumber available in session.conversationData.Ticket
 			Remember to endConversation at the handler function
 			*/
-			console.log("In the ServiceNow:/GetTicket function");
+			console.log(session.message.address.conversation.id+",Entering:ServiceNow:/GetTicket");
 			//console.log(args);
 			//console.log("Finding ticket:"+args.ticket_number);
 			var uName=session.message.address.user.name;
@@ -67,7 +67,7 @@ lib.dialog('/MakeIncidents',[
 		Returns a set of hero cards at session.conversationData.TicketCards
 		picks up the Tickets from session.conversationData.Tickets
 		*/
-		console.log("In the ServiceNow:/MakeIncidents function");
+		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/MakeIncidents");
 		var tickets;
 		if('Tickets' in session.conversationData){
 			tickets=session.conversationData.Tickets;
@@ -126,7 +126,7 @@ lib.dialog('/MakeIncidents',[
 					     
 lib.dialog('/CreateIncident',[
 	function(session,args,next){
-		console.log("In the ServiceNow:/CreateIncident function");
+		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		var short_description=session.conversationData.IncidentDescription;
 		var Snow=new serviceNow('https://wiprodemo4.service-now.com/','admin','LWP@2015');
 		Snow.setTable('incident');

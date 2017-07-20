@@ -1,6 +1,7 @@
 var builder=require('botbuilder');
 var serviceNow = require("service-now");
 var snow=require('snow-glide');
+var util=require('util');
 
 console.log(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
 
@@ -130,10 +131,11 @@ lib.dialog('/CreateIncident',[
 		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		var short_description=session.conversationData.IncidentDescription;
 		var iSnow=new snow('wiprodemo4','admin','LWP@2015');
+		console.log(util.inspect(args));
 		iSnow.login();
 		var newIncident=new iSnow.GlideRecord('incident');
-		newIncident.priority=args.parameters.priority;
-		newIncident.short_description=args.parameters.short_description;
+		newIncident.priority=args.priority;
+		newIncident.short_description=args.short_description;
 		newIncident.insert(function(id){
 			console.log(id);
 			session.send("Created an incident with incident number: "+id);

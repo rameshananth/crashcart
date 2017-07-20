@@ -1,6 +1,6 @@
 var builder=require('botbuilder');
 var serviceNow = require("service-now");
-var snow=require('sn-node');
+var snow=require('snow-glide');
 
 console.log(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
 

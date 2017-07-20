@@ -135,6 +135,7 @@ lib.dialog('/CreateIncident',[
 		newIncident.priority=args.priority;
 		newIncident.short_description=args.short_description;
 		newIncident.insert(function(id){
+			console.log(id);
 			session.send("Created an incident with incident number: "+id);
 			session.endDialogWithResult({incidentNumber:id});
 		});

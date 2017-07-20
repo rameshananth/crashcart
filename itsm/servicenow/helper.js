@@ -132,8 +132,8 @@ lib.dialog('/CreateIncident',[
 		var iSnow=new snow('wiprodemo4','admin','LWP@2015');
 		iSnow.login();
 		var newIncident=new iSnow.GlideRecord('incident');
-		newIncident.priority=args.priority;
-		newIncident.short_description=args.short_description;
+		newIncident.priority=args.parameters.priority;
+		newIncident.short_description=args.parameters.short_description;
 		newIncident.insert(function(id){
 			console.log(id);
 			session.send("Created an incident with incident number: "+id);

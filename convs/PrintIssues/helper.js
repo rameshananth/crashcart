@@ -160,13 +160,87 @@ var gjCheckIfTriageOK={
 	}
 };
 
-var gjGetUsersMachineName={
+var _gjGetUsersMachineName={
 	name:"MSBotFramework:/GetText",
 	parameters:{
-		message:"Please enter the name of the laptop/desktop from which you are attempting to print"
+		message:"Please enter the name of the laptop/desktop from which you are attempting to print",
+		persistResponse:true,
+		persistVariable:'MachineName'
 	}
 };
 
+var _gjRaisePrintIncident={
+	name:"MSBotFramework:/SendMessage",
+	parameters:{
+		message: "Raising a print incident"
+	}
+};
+
+var _gjCheckMachineDomainJoin={
+	name:"MSBotFramework:/GetConfirm",
+	parameters:{
+		message:"Is your machine joined to the domain?"
+	}
+};
+
+var _gjGetPrinterName={
+	name:"MSBotFramework:/CheckPrereqs",
+	parameters:{
+		check:{
+			name:"MSBotFramework:/GetText",
+			parameters:{
+				message: "What printer are you trying to print to?",
+				persistResponse:true,
+				persistVariable:'PrinterName'
+			}
+		},
+		success:{
+			name:'',
+			parameters:{message:null}
+		},
+		failure:{
+			name:'',
+			parameters:{message:null}
+		}
+	}
+};
+
+var _gjCheckIfMachineJoinedToDomain={
+	name:"MSBotFramework:/Checkprereqs",
+	parameters:{
+		check:{
+			name:_gjCheckMachineDomainJoin.name,
+			parameters:_gjCheckMachineDomainJoin.parameters
+		},
+		success:{
+			name:_gjGetPrinterName.name,
+			parameters:_gjGetPrinterName.parameters
+		},
+		failure:{
+			name:_gjRaisePrintIncident.name,
+			parameters:{message:"Raising a print incident. User's machine not joined to domain"}
+		}
+		
+	}
+};
+
+var gjGetUsersMachineName={
+	name:"MSBotFramework:/CheckPrereqs",
+	parameters:{
+		check:{
+			name:_gjGetUsersMachineName.name,
+			parameters:_gjGetUsersMachineName.parameters
+		},
+		success:{
+			name:_gjCheckIfMachineJoinedToDomain.name,
+			parameters:_gjCheckIfMachineJoinedToDomain.parameters
+		},
+		failure:{
+			name:_gjRaisePrintIncident.name,
+			parameters:{message:"Raising a print incident. But unable to get user's machine name"}
+		}
+	}
+};
 
 
 var gjStartTriage={

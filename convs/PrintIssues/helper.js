@@ -173,7 +173,7 @@ var _gjRaisePrintIncident={
 	name:"ServiceNow:/CreateIncident",
 	parameters:{
 		short_description: "Raising a print incident",
-		priority: "high"
+		priority: "1"
 	}
 };
 

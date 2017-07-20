@@ -206,7 +206,7 @@ var _gjGetPrinterName={
 };
 
 var _gjCheckIfMachineJoinedToDomain={
-	name:"MSBotFramework:/Checkprereqs",
+	name:"MSBotFramework:/CheckPrereqs",
 	parameters:{
 		check:{
 			name:_gjCheckMachineDomainJoin.name,

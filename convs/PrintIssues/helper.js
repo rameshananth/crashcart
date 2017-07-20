@@ -219,7 +219,7 @@ var _gjCheckIfMachineJoinedToDomain={
 		},
 		failure:{
 			name:_gjRaisePrintIncident.name,
-			parameters:{message:"Raising a print incident. User's machine not joined to domain"}
+			parameters:_gjRaisePrintIncident.parameters
 		}
 		
 	}

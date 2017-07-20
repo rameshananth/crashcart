@@ -129,7 +129,7 @@ lib.dialog('/CreateIncident',[
 	function(session,args,next){
 		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		var short_description=session.conversationData.IncidentDescription;
-		var iSnow=new snow('https://wiprodemo4.service-now.com/','admin','LWP@2015');
+		var iSnow=new snow('wiprodemo4','admin','LWP@2015');
 		iSnow.login();
 		var newIncident=new iSnow.GlideRecord('incident');
 		newIncident.priority=args.priority;

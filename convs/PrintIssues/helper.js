@@ -170,9 +170,10 @@ var _gjGetUsersMachineName={
 };
 
 var _gjRaisePrintIncident={
-	name:"MSBotFramework:/SendMessage",
+	name:"ServiceNow:/CreateIncident",
 	parameters:{
-		message: "Raising a print incident"
+		short_description: "Raising a print incident",
+		priority: "high"
 	}
 };
 

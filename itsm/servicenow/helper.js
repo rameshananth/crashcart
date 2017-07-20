@@ -1,5 +1,6 @@
 var builder=require('botbuilder');
 var serviceNow = require("service-now");
+var snow=require('sn-node');
 
 console.log(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
 
@@ -128,8 +129,16 @@ lib.dialog('/CreateIncident',[
 	function(session,args,next){
 		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		var short_description=session.conversationData.IncidentDescription;
-		var Snow=new serviceNow('https://wiprodemo4.service-now.com/','admin','LWP@2015');
-		Snow.setTable('incident');
+		var iSnow=new snow('https://wiprodemo4.service-now.com/','admin','LWP@2015');
+		iSnow.login();
+		var newIncident=new iSnow.GlideRecord('incident');
+		newIncident.priority=args.priority;
+		newIncident.short_description=args.short_description;
+		newIncident.insert(function(id){
+			session.send("Created an incident with incident number: "+id);
+			session.endDialogWithResult({incidentNumber:id});
+		});
+		//Snow.setTable('incident');
 	}
 		//Snow.
 ]);

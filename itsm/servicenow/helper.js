@@ -130,16 +130,15 @@ lib.dialog('/CreateIncident',[
 	function(session,args,next){
 		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		//var short_description=session.userData.problem_description;
-		console.log("The issue to raise ticket is for: " + short_description);
-		var config = {
+				var config = {
 				    instance: "https://wiprodemo4.service-now.com",
 				    username: "admin",
 				    password: "LWP@2015"
 				};
 		var iSnow =  new snow.Client(config);
 		var o = { 	
-			    "short_description": short_description,
-			    "description": short_description,
+			    "short_description": "Print Issues for user",
+			    "description": "Print Issues for user",
 			    "urgency": "1",
 			    "severity": "1",
 			    "impact": "1"

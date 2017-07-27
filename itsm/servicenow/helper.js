@@ -143,7 +143,7 @@ lib.dialog('/CreateIncident',[
 			    "severity": "1",
 			    "impact": "1"
 	     		}
-		client.insert("incident",o,function(error,result) {
+		iSnow.insert("incident",o,function(error,result) {
   //console.log(result);
 		var response = result.records;
 		console.log(response[0].number +" " + response[0].priority);

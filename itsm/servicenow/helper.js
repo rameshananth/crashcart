@@ -135,7 +135,7 @@ lib.dialog('/CreateIncident',[
 				    username: "admin",
 				    password: "LWP@2015"
 				};
-		var iSnow =  new servicenow.Client(config);
+		var iSnow =  new snow.Client(config);
 		var o = { 	
 			    "short_description": short_description,
 			    "description": short_description,

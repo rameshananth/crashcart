@@ -1,6 +1,6 @@
 var builder=require('botbuilder');
 var serviceNow = require("service-now");
-var snow=require('snow-glide');
+var snow=require('servicenow');
 var util=require('util');
 
 console.log(process.env.ITSM_ENDPOINT,process.env.ITSM_ACCOUNT,process.env.ITSM_PASSWORD);
@@ -130,16 +130,31 @@ lib.dialog('/CreateIncident',[
 	function(session,args,next){
 		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		var short_description=session.conversationData.IncidentDescription;
-		var iSnow=new snow('wiprodemo4','admin','LWP@2015');
-		console.log(util.inspect(args));
-		iSnow.login();
-		var newIncident=new iSnow.GlideRecord('incident');
-		newIncident.priority=args.priority;
-		newIncident.short_description=args.short_description;
-		newIncident.insert(function(id){
-			console.log(util.inspect(id));
-			session.send("Created an incident with incident number: "+id);
-			session.endDialogWithResult({incidentNumber:id});
+		var config = {
+				    instance: "https://wiprodemo4.service-now.com",
+				    username: "admin",
+				    password: "LWP@2015"
+				};
+		var iSnow =  new servicenow.Client(config);
+		var o = { 	
+			    "short_description": short_description,
+			    "description": short_description,
+			    "urgency": "1",
+			    "severity": "1",
+			    "impact": "1"
+	     		}
+		client.insert("incident",o,function(error,result) {
+  //console.log(result);
+		var response = result.records;
+		console.log(response[0].number +" " + response[0].priority);
+		session.send("Created an incident with incident number: "+response[0].number);
+		session.endDialogWithResult({incidentNumber:response[0].number});
+ 		 if(!error) {
+			 session.send("Seems like a technical glitch, Unable to create a ticket for you, can you call 911");
+    // result cosession.send("Created an incident with incident number: "+response[0].number);ntains array of inserted objets
+  		}
+		
+			
 		});
 		//Snow.setTable('incident');
 	}

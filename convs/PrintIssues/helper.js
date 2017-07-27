@@ -172,8 +172,11 @@ var _gjGetUsersMachineName={
 var _gjRaisePrintIncident={
 	name:"ServiceNow:/CreateIncident",
 	parameters:{
-		short_description: "Raising a print incident",
-		priority: "1"
+		 	"short_description": "Print problem Incident 1",
+    			"description": "This is a Print incident 1",
+    			"urgency": "1",
+   		 	"severity": "1",
+    			"impact": "1"
 	}
 };
 

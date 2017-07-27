@@ -217,7 +217,7 @@ var _gjCheckIfMachineJoinedToDomain={
 			parameters:_gjGetPrinterName.parameters
 		},
 		failure:{
-			var session.userData.problem_description = "Not Joined Domain";
+			session.userData.problem_description = "Not Joined Domain";
 			name:_gjRaisePrintIncident.name,
 			parameters:_gjRaisePrintIncident.parameters
 		}

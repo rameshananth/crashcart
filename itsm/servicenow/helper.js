@@ -130,6 +130,7 @@ lib.dialog('/CreateIncident',[
 	function(session,args,next){
 		console.log(session.message.address.conversation.id+",Entering:ServiceNow:/CreateIncident");
 		var short_description=session.conversationData.IncidentDescription;
+		console.log("The issue to raise ticket is for: " + short_description);
 		var config = {
 				    instance: "https://wiprodemo4.service-now.com",
 				    username: "admin",

@@ -172,11 +172,7 @@ var _gjGetUsersMachineName={
 var _gjRaisePrintIncident={
 	name:"ServiceNow:/CreateIncident",
 	parameters:{
-		 	"short_description": "Print problem Incident 1",
-    			"description": "This is a Print incident 1",
-    			"urgency": "1",
-   		 	"severity": "1",
-    			"impact": "1"
+		message:null			
 	}
 };
 
@@ -221,6 +217,7 @@ var _gjCheckIfMachineJoinedToDomain={
 			parameters:_gjGetPrinterName.parameters
 		},
 		failure:{
+			var session.userData.problem_description = "Not Joined Domain";
 			name:_gjRaisePrintIncident.name,
 			parameters:_gjRaisePrintIncident.parameters
 		}

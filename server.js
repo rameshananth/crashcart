@@ -1,9 +1,13 @@
 var restify = require('restify');
 var builder = require('botbuilder');
-var Database = require('arangojs').Database;
-var db= new Database('http://13.65.29.182:8529');
-const names=await db.listUserDatabases();
-console.log(names);
+var db= require('arangojs')({
+				database:"fixit",
+				url:"http://13.65.29.182:8529"
+			   });
+db.useBasicAuth('root',process.env.ARANGO_PASSWORD);
+db.useDatabase('fixit');
+db.listCollections.then((cols)=>console.log(cols),(err)=>console.error(err));
+
 
 /*
 Refactor log functions

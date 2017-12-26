@@ -6,7 +6,7 @@ var db= require('arangojs')({
 			   });
 db.useBasicAuth('root',process.env.ARANGO_PASSWORD);
 db.useDatabase('fixit');
-db.listCollections.then((cols)=>console.log(cols),(err)=>console.error(err));
+db.listCollections().then((cols)=>console.log(cols),(err)=>console.error(err));
 
 
 /*

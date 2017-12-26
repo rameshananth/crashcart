@@ -2,7 +2,8 @@ var restify = require('restify');
 var builder = require('botbuilder');
 var Database = require('arangojs').Database;
 var db= new Database('http://13.65.29.182:8529');
-console.log(db.listCollections());
+const names=await db.listUserDatabases();
+console.log(names);
 
 /*
 Refactor log functions

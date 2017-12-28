@@ -148,13 +148,19 @@ var gjGetTicketStatusConv={
 	}
 };
 
+var newgjTicketStatusConv={
+	name:"MSBotFramework:/CheckPrereqs",
+	parameters:{
+		intentName:"ServiceDesk.Update"
+	}
+};
 
 
 //If you have an Update request
 var _mapping=[
 	{intentName: 'ServiceDesk.Update',
 	 dialogName: '/GetUpdate',
-	 entryPoint:gjGetTicketStatusConv
+	 entryPoint:newgjGetTicketStatusConv
 	}
 ];
 

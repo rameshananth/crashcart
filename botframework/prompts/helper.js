@@ -81,7 +81,7 @@ lib.dialog('/CheckPrereqs',[
     //console.log(args);
     args.check={};
     if(args.nodeID){//A node was specified so call the node as a check function
-	    var query_str="FOR FOR v,e,p in OUTBOUND '"+args.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
+	    var query_str="FOR v,e,p in OUTBOUND '"+args.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
 	    console.log(query_str);
 	    db.query(query_str
 		).then(cursor=>cursor.all()

@@ -19,6 +19,7 @@ function logThis(results){
 lib.dialog('/Intent',[
 	function(session,args,next){
 		//console.log("Hello. You are in the intent function");
+		session.endDialogWithResult{success:true});
 	}
 ]);
 
@@ -93,11 +94,11 @@ lib.dialog('/CheckPrereqs',[
 		).then(cursor=>cursor.all()
 		).then(vals=>{
 		    console.log(vals);
-		    if(vals.length==0){
+		    if(vals.length==0){//No paths remaining
 			    console.log("End of path");
 			    return;
 		    }
-		    else if(vals.length==1){
+		    else if(vals.length==1){//Some path remains so let's call the check function
 			    console.log(vals);
 			    console.log("Vertice 0");
 			    console.log(vals[0].vertices[0]);
@@ -105,16 +106,34 @@ lib.dialog('/CheckPrereqs',[
 			    console.log("Check function name:"+name);
 			    var parameters=vals[0].vertices[0].parameters;
 			    console.log("Check function parameters:"+parameters);
-			    var type=vals[0].edges[0].type;
-			    var to=vals[0].edges[0]._to;
-			    console.log("One edge of type "+type+" leading to"+to);
+			    //var type=vals[0].edges[0].type;
+			    //var to=vals[0].edges[0]._to;
+			    //console.log("One edge of type "+type+" leading to"+to);
 			    args.check['name']=name;
 			    args.check['parameters']=parameters;
-			    args.check[type]=to;
+			    //args.check[type]=to;
 			    console.log(args);
 			    session.dialogData.args=args;
 			    console.log(session.dialogData);
-			    session.beginDialog(args.check.name,args.check.parameters);
+			    
+			    
+			    //next();
+		    }
+		    console.log("Returned from the check function");
+		    next();
+	    });
+	    
+    }
+    //session.dialogData.args=args;
+    //console.log("After settting and before calling the check");
+    //console.log(session.dialogData);
+  },
+  function(session,result){
+    logThis("In the cleanup function");
+    logThis(session);
+    
+    /*
+    session.beginDialog(args.check.name,args.check.parameters);
 			    if('persistResponse' in args.check.parameters){
 	    			console.log("persistResponse exists");
 	    			if('persistVariable' in args.check.parameters){
@@ -138,21 +157,9 @@ lib.dialog('/CheckPrereqs',[
 			   else{
 	    			console.log("persistResponse is missing");
     			   }
-			    //next();
-		    }
-		    console.log("Returned from the check function");
-		    next();
-	    });
-	    
-    }
-    //session.dialogData.args=args;
-    //console.log("After settting and before calling the check");
-    //console.log(session.dialogData);
-  },
-  function(session,result){
-    logThis("In the cleanup function");
-    logThis(session.dialogData);
     
+    
+    */
 		  
     if(result.success==true){
       console.log("The Check function returned success");

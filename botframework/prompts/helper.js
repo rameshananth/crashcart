@@ -177,7 +177,7 @@ lib.dialog('/CheckPrereqs',[
     	   		}
 		    	
 		    	//And then the call to the next piece of the conversation
-		    	for(int i=0;i<vals[0].edges.length;i++){
+		    	for(var i=0;i<vals[0].edges.length;i++){
 		   		var edge=vals[0].edges[i];
 		   		if(result.success==edge){
 			   		console.log("The return value of the function is "+result.success+" so calling the "+edge.type+" edge to "+edge._to+" node");

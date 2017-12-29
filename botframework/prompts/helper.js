@@ -177,6 +177,7 @@ lib.dialog('/CheckPrereqs',[
     	   		}
 		    	
 		    	//And then the call to the next piece of the conversation
+		        console.log(vals[0].edges);
 		    	for(var i=0;i<vals[0].edges.length;i++){
 		   		var edge=vals[0].edges[i];
 		   		if(result.success==edge){

@@ -90,7 +90,7 @@ lib.dialog('/GetText',[
 
 lib.dialog('/CheckPrereqs',[
   function(session,args,next){
-    console.log(session.conversationData);
+    
     if(args.nodeID){
 	    session.conversationData.currentNode=args.nodeID;
     }
@@ -105,6 +105,7 @@ lib.dialog('/CheckPrereqs',[
 		).then(cursor=>cursor.all()
 		).then(vals=>{
 		    console.log(vals);
+		    console.log(session.conversationData);
 		    if(vals.length==0){//No paths remaining
 			    console.log("End of path");
 			    return;

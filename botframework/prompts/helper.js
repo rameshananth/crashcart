@@ -124,6 +124,7 @@ lib.dialog('/CheckPrereqs',[
     
   },
   function(session,result){
+    logThis("In the cleanup function");
     logThis(session.dialogData.args);
     if('persistResponse' in session.dialogData.args.check.parameters){
 	    console.log("persistResponse exists");

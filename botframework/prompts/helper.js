@@ -100,15 +100,25 @@ lib.dialog('/CheckPrereqs',[
 			    console.log(vals);
 			    console.log("Vertice 0");
 			    console.log(vals[0].vertices[0]);
-			    args.check['name']=vals[0].vertices[0].library+":/"+vals[0].vertices[0].name;
-			    args.check['parameters']=vals[0].vertices[0].parameters;
+			    var name=vals[0].vertices[0].library+":/"+vals[0].vertices[0].name;
+			    console.log("Check function name:"+name);
+			    var parameters=vals[0].vertices[0].parameters;
+			    console.log("Check function parameters:"+parameters);
 			    var type=vals[0].edges[0].type;
-			    args.check[type]=vals[0].vertices[1]._id;
+			    var to=vals[0].edges[0]._to;
+			    console.log("One edge of type "+type+" leading to"+to);
+			    args.check['name']=name;
+			    args.check['parameters']=parameters;
+			    args.check[type]=to;
+			    console.log(args);
+			    session.dialogData.args=args;
+			    console.log(session.dialogData);
+			    
 		    }
 	    });
 	    
     }
-    session.dialogData.args=args;
+    //session.dialogData.args=args;
     console.log("After settting and before calling the check");
     console.log(session.dialogData);
     session.beginDialog(args.check.name,args.check.parameters);

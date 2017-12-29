@@ -37,7 +37,7 @@ lib.dialog('/GetEntity',[
 		The entityName is passed on as an argument parameter: entityName
 		You can persist this variable by making it part of a checkPrereqs function
 		*/
-		var eVar=builder.EntityRecognizer.findEntity(session.conversationData.intent.entities, args.entityName);
+		var eVar=builder.EntityRecognizer.findEntity(args.conversationData.intent.entities, args.entityName);
 		if(eVar){
 			session.endDialogWithResult({response:eVar.entity,success:true});
 		}
@@ -123,6 +123,7 @@ lib.dialog('/CheckPrereqs',[
 			    //console.log("One edge of type "+type+" leading to"+to);
 			    args.check['name']=name;
 			    args.check['parameters']=parameters;
+			    args.check['parameters']['conversationData']=session.conversationData;
 			    //args.check[type]=to;
 			    console.log(args);
 			    session.dialogData.args=args;
@@ -166,10 +167,10 @@ lib.dialog('/CheckPrereqs',[
 		    	var parameters=vals[0].vertices[0].parameters;//Get the parameters of the check function
 	    		if('persistResponse' in parameters){
 		    		console.log("persistResponse exists");
-		    		if('persistVariable' in args.check.parameters){
+		    		if('persistVariable' in parameters){
 		    			console.log("persistVariable exists");
-					if(typeof args.check.parameters.persistVariable!=undefined){
-						var sVname=args.check.parameters.persistVariable;
+					if(typeof parameters.persistVariable!=undefined){
+						var sVname=parameters.persistVariable;
 			    			console.log("persistVariable refers to "+sVname);
 			    			console.log("persisting the response "+result.response+" to session.conversationData."+sVname);
 			    			session.conversationData[sVname]=result.response;

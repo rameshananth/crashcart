@@ -78,6 +78,7 @@ lib.dialog('/CheckPrereqs',[
   function(session,args,next){
     console.log("In the MSBotFramework:/CheckPrereqs function");
     //session.dialogData.args=args;
+    console.log(args);
     args.check={};
     if(args.parameters.nodeID){//A node was specified so call the node as a check function
 	    var query_str="FOR FOR v,e,p in OUTBOUND '"+args.parameters.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";

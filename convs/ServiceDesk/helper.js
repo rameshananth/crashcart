@@ -190,6 +190,7 @@ function makeWaterFall(dialogName,entryPoint){
 			logThis("In "+dialogName+" dialog");
 			//Save the global intent to the conversation data
 			session.conversationData.intent=args.intent;
+			session.save();
 			session.beginDialog(entryPoint.name,entryPoint.parameters);
 		},
 		function(session,results){

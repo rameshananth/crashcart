@@ -115,6 +115,29 @@ lib.dialog('/CheckPrereqs',[
 			    session.dialogData.args=args;
 			    console.log(session.dialogData);
 			    session.beginDialog(args.check.name,args.check.parameters);
+			    if('persistResponse' in session.dialogData.args.check.parameters){
+	    			console.log("persistResponse exists");
+	    			if('persistVariable' in session.dialogData.args.check.parameters){
+		    			console.log("persistVariable exists");
+		    			if(typeof session.dialogData.args.check.parameters.persistVariable!=undefined){
+			    			var sVname=session.dialogData.args.check.parameters.persistVariable;
+			    			console.log("persistVariable refers to "+sVname);
+			    			console.log("persisting the response "+result.response+" to session.conversationData."+sVname);
+			    			session.conversationData[sVname]=result.response;
+			    			logThis(session.conversationData);
+		    			}
+		    			else{
+			    			console.log("persistVariable is undefined");
+		    			}
+        		
+	   			}
+	    		 	else{
+		    			console.log("persistVariable is missing");
+	    			}
+    			   }
+			   else{
+	    			console.log("persistResponse is missing");
+    			   }
 			    //next();
 		    }
 		    console.log("Returned from the check function");
@@ -128,29 +151,8 @@ lib.dialog('/CheckPrereqs',[
   },
   function(session,result){
     logThis("In the cleanup function");
-    logThis(session.dialogData.args);
-    if('persistResponse' in session.dialogData.args.check.parameters){
-	    console.log("persistResponse exists");
-	    if('persistVariable' in session.dialogData.args.check.parameters){
-		    console.log("persistVariable exists");
-		    if(typeof session.dialogData.args.check.parameters.persistVariable!=undefined){
-			    var sVname=session.dialogData.args.check.parameters.persistVariable;
-			    console.log("persistVariable refers to "+sVname);
-			    console.log("persisting the response "+result.response+" to session.conversationData."+sVname);
-			    session.conversationData[sVname]=result.response;
-			    logThis(session.conversationData);
-		    }
-		    else{
-			    console.log("persistVariable is undefined");
-		    }
-        		
-	    }
-	    else{
-		    console.log("persistVariable is missing");
-	    }
-    }else{
-	    console.log("persistResponse is missing");
-    }
+    logThis(session.dialogData);
+    
 		  
     if(result.success==true){
       console.log("The Check function returned success");

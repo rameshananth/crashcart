@@ -92,7 +92,8 @@ lib.dialog('/CheckPrereqs',[
 			    args.check.name=vals[0].vertices[0].library+":/"+vals[0].vertices[0].name;
 			    args.check.parameters=vals[0].vertices[0].parameters;
 			    var type=vals[0].edges[0].type;
-			    args.check[type]=vals[0].vertices[1].library
+			    args.check[type]=vals[0].vertices[1]._id;
+		    }
 	    });
 	    
     }

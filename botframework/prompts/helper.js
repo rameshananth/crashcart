@@ -182,7 +182,17 @@ lib.dialog('/CheckPrereqs',[
 		        console.log(result);
 		    	for(var i=0;i<vals[0].edges.length;i++){
 		   		var edge=vals[0].edges[i];
-		   		if(result.success==edge){
+				var bool=false;
+				if(edge.type=='success'){
+					 bool=true;
+				}
+				else if(edge.type=='failure'){
+					bool=false;
+				}
+				else{
+					console.log("Edge type undefined");
+				}
+		   		if(result.success==bool){
 			   		console.log("The return value of the function is "+result.success+" so calling the "+edge.type+" edge to "+edge._to+" node");
 			   		var parameters={'nodeID':edge._to};
 			   		session.beginDialog("MSBotFramework:/CheckPrereqs",parameters);

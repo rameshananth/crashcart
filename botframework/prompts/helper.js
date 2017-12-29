@@ -18,6 +18,7 @@ function logThis(results){
 
 lib.dialog('/Intent',[
 	function(session,args,next){
+		console.log("Hello. You are in the intent function");
 	}
 ]);
 

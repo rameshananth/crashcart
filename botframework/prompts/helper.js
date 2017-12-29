@@ -134,7 +134,19 @@ lib.dialog('/CheckPrereqs',[
     db.query(query_str
     ).then(cursor=>cursor.all()
     ).then(vals=>{
-	    
+	    if(vals.length==0){
+	    	if(result.success==true){
+		    console.log("Success but end of path");
+		    session.endDialogWithResult({response:result.response,success:true});
+	    	}
+	    	else if(result.success==false){
+		    console.log("Success but end of path");
+		    session.endDialogWithResult({response:result.response,success:false});
+	    	}
+	    	else{
+		    console.log("Return value is neither true nor false!");
+	    	}		        
+    	    }
     });
  }
 ]);

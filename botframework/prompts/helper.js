@@ -113,15 +113,15 @@ lib.dialog('/CheckPrereqs',[
 			    console.log(args);
 			    session.dialogData.args=args;
 			    console.log(session.dialogData);
-			    
+			    session.beginDialog(args.check.name,args.check.parameters);
 		    }
 	    });
 	    
     }
     //session.dialogData.args=args;
-    console.log("After settting and before calling the check");
-    console.log(session.dialogData);
-    session.beginDialog(args.check.name,args.check.parameters);
+    //console.log("After settting and before calling the check");
+    //console.log(session.dialogData);
+    
   },
   function(session,result){
     logThis(session.dialogData.args);

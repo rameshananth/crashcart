@@ -160,7 +160,7 @@ var newgjTicketStatusConv={
 var _mapping=[
 	{intentName: 'ServiceDesk.Update',
 	 dialogName: '/GetUpdate',
-	 entryPoint:newgjGetTicketStatusConv
+	 entryPoint:newgjTicketStatusConv
 	}
 ];
 

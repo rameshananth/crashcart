@@ -18,6 +18,13 @@ function logThis(results){
 
 lib.dialog('/Intent',[
 	function(session,args,next){
+		/**
+		MSBotFramework:/Intent(intentName){
+			Always called to initiate a conversation
+			Calls the next node as part of the checkprereqs
+			Persists the intent to arangodb
+		**/
+		var query_str="FOR doc in Cheep'"+args.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
 		//console.log("Hello. You are in the intent function");
 		session.endDialogWithResult({success:true});
 	}
@@ -83,7 +90,7 @@ lib.dialog('/GetText',[
 
 lib.dialog('/CheckPrereqs',[
   function(session,args,next){
-    console.log(session);
+    console.log(session.conversationData);
     if(args.nodeID){
 	    session.conversationData.currentNode=args.nodeID;
     }

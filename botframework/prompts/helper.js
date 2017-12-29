@@ -83,6 +83,9 @@ lib.dialog('/GetText',[
 
 lib.dialog('/CheckPrereqs',[
   function(session,args,next){
+    if(args.nodeID){
+	    session.conversationData.currentNode=args.nodeID;
+    }
     console.log("In the MSBotFramework:/CheckPrereqs function");
     //session.dialogData.args=args;
     //console.log(args);
@@ -129,7 +132,7 @@ lib.dialog('/CheckPrereqs',[
     logThis("In the cleanup function");
     //logThis(session);
     //Need to requery because promises. Blech!
-    var query_str="FOR v,e,p in OUTBOUND '"+args.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
+    var query_str="FOR v,e,p in OUTBOUND '"+session.conversationData.currentNode+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
     console.log(query_str);
     db.query(query_str
     ).then(cursor=>cursor.all()

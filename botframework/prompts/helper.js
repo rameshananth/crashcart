@@ -16,6 +16,11 @@ function logThis(results){
 	}
 }
 
+lib.dialog('/Intent',[
+	function(session,args,next){
+	}
+]);
+
 lib.dialog('/GetEntity',[
 	function(session,args,next){
 		/*

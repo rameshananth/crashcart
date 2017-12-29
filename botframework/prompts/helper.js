@@ -78,10 +78,10 @@ lib.dialog('/CheckPrereqs',[
   function(session,args,next){
     console.log("In the MSBotFramework:/CheckPrereqs function");
     //session.dialogData.args=args;
-    console.log(args);
+    //console.log(args);
     args.check={};
-    if(args.parameters.nodeID){//A node was specified so call the node as a check function
-	    var query_str="FOR FOR v,e,p in OUTBOUND '"+args.parameters.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
+    if(args.nodeID){//A node was specified so call the node as a check function
+	    var query_str="FOR FOR v,e,p in OUTBOUND '"+args.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
 	    db.query(query_str
 		).then(cursor=>cursor.all()
 		).then(vals=>{
@@ -90,6 +90,7 @@ lib.dialog('/CheckPrereqs',[
 			    return;
 		    }
 		    else if(vals.length==1){
+			    console.log(vals);
 			    args.check.name=vals[0].vertices[0].library+":/"+vals[0].vertices[0].name;
 			    args.check.parameters=vals[0].vertices[0].parameters;
 			    var type=vals[0].edges[0].type;

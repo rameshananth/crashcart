@@ -83,6 +83,7 @@ lib.dialog('/GetText',[
 
 lib.dialog('/CheckPrereqs',[
   function(session,args,next){
+    console.log(session);
     if(args.nodeID){
 	    session.conversationData.currentNode=args.nodeID;
     }

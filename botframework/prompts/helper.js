@@ -114,9 +114,11 @@ lib.dialog('/CheckPrereqs',[
 			    console.log(args);
 			    session.dialogData.args=args;
 			    console.log(session.dialogData);
-			    session.beginDialog(args.check.name,args.check.parameters);    
+			    session.beginDialog(args.check.name,args.check.parameters);
+			    next();
 		    }
 		    console.log("Returned from the check function");
+		    next();
 	    });
 	    
     }

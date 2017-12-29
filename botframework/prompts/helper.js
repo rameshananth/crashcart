@@ -125,6 +125,7 @@ lib.dialog('/CheckPrereqs',[
 			    //args.check[type]=to;
 			    console.log(args);
 			    session.dialogData.args=args;
+			    session.save();
 			    session.beginDialog(args.check.name,args.check.parameters);
 			    console.log(session.dialogData);
 		    }
@@ -203,6 +204,7 @@ lib.dialog('/CheckPrereqs',[
 		   		if(result.success==bool){
 			   		console.log("The return value of the function is "+result.success+" so calling the "+edge.type+" edge to "+edge._to+" node");
 			   		var parameters={'nodeID':edge._to};
+					session.save();
 			   		session.beginDialog("MSBotFramework:/CheckPrereqs",parameters);
 		   		}
 	   		}

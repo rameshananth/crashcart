@@ -2,6 +2,13 @@ var builder=require('botbuilder');
 var lib=new builder.Library('MSBotFramework');
 const util=require('util');
 const debug=1;
+var aqlquery=require('arangojs').aqlQuery;
+var db= require('arangojs')({
+				database:"fixit",
+				url:"http://13.65.29.182:8529"
+			   });
+db.useBasicAuth('root','wipro@123');
+db.useDatabase('fixit');
 
 function logThis(results){
 	if(debug==1){
@@ -66,10 +73,32 @@ lib.dialog('/GetText',[
   }
 ]);
 
+
 lib.dialog('/CheckPrereqs',[
   function(session,args,next){
     console.log("In the MSBotFramework:/CheckPrereqs function");
+    //session.dialogData.args=args;
+    args.check={};
+    if(args.parameters.node){//A node was specified so call the node as a check function
+	    var query_str="FOR FOR v,e,p in OUTBOUND '"+args.parameters.node+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
+	    db.query(query_str
+		).then(cursor=>cursor.all()
+		).then(vals=>{
+		    if(vals.length==0){
+			    console.log("End of path");
+			    return;
+		    }
+		    else if(vals.length==1){
+			    args.check.name=vals[0].vertices[0].library+":/"+vals[0].vertices[0].name;
+			    args.check.parameters=vals[0].vertices[0].parameters;
+			    var type=vals[0].edges[0].type;
+			    args.check[type]=vals[0].vertices[1].library
+	    });
+	    
+    }
     session.dialogData.args=args;
+    console.log("After settting and before calling the check");
+    console.log(session.dialogData);
     session.beginDialog(args.check.name,args.check.parameters);
   },
   function(session,result){

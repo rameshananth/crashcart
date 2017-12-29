@@ -115,9 +115,6 @@ lib.dialog('/CheckPrereqs',[
 			    console.log(args);
 			    session.dialogData.args=args;
 			    console.log(session.dialogData);
-			    
-			    
-			    //next();
 		    }
 		    console.log("Returned from the check function");
 		    next();
@@ -130,9 +127,23 @@ lib.dialog('/CheckPrereqs',[
   },
   function(session,result){
     logThis("In the cleanup function");
-    logThis(session);
-    
-    /*
+    //logThis(session);
+    //Need to requery because promises. Blech!
+    var query_str="FOR v,e,p in OUTBOUND '"+args.nodeID+"' GRAPH 'Conversations.ServiceDesk.Update'\n RETURN p";
+    console.log(query_str);
+    db.query(query_str
+    ).then(cursor=>cursor.all()
+    ).then(vals=>{
+	    
+    });
+ }
+]);
+
+module.exports.createLibrary = function () {
+    return lib.clone();
+};
+
+ /*
     session.beginDialog(args.check.name,args.check.parameters);
 			    if('persistResponse' in args.check.parameters){
 	    			console.log("persistResponse exists");
@@ -157,15 +168,12 @@ lib.dialog('/CheckPrereqs',[
 			   else{
 	    			console.log("persistResponse is missing");
     			   }
-    
-    
-    */
-		  
-    if(result.success==true){
+   
+   if(result.success==true){
       console.log("The Check function returned success");
       if(!session.dialogData.args.success.name){
         console.log("But no success function was defined, so returning with results");
-        session.endDialogWithResult({response:result.response,success:true});
+        
       }
       else{
         console.log("Invoking the success function");
@@ -183,9 +191,6 @@ lib.dialog('/CheckPrereqs',[
         session.beginDialog(session.dialogData.args.failure.name,session.dialogData.args.failure.parameters);
       }
     }
-  }
-]);
 
-module.exports.createLibrary = function () {
-    return lib.clone();
-};
+    
+    */

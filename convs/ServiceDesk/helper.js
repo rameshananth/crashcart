@@ -151,7 +151,7 @@ var gjGetTicketStatusConv={
 var newgjTicketStatusConv={
 	name:"MSBotFramework:/CheckPrereqs",
 	parameters:{
-		nodeId:'Cheep/156045'
+		nodeID:'Cheep/156045'
 	}
 };
 

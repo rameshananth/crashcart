@@ -98,7 +98,8 @@ lib.dialog('/CheckPrereqs',[
 		    }
 		    else if(vals.length==1){
 			    console.log(vals);
-			    console.log("Vertice 0"+vals[0].vertices[0]);
+			    console.log("Vertice 0");
+			    console.log(vals[0].vertices[0]);
 			    args.check['name']=vals[0].vertices[0].library+":/"+vals[0].vertices[0].name;
 			    args.check['parameters']=vals[0].vertices[0].parameters;
 			    var type=vals[0].edges[0].type;

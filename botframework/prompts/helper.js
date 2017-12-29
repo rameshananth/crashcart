@@ -122,8 +122,7 @@ lib.dialog('/CheckPrereqs',[
     }
     //session.dialogData.args=args;
     //console.log("After settting and before calling the check");
-    //console.log(session.dialogData);
-    
+    console.log(session.dialogData);
   },
   function(session,result){
     logThis("In the cleanup function");

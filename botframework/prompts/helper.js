@@ -150,6 +150,42 @@ lib.dialog('/CheckPrereqs',[
 		    console.log("Return value is neither true nor false!");
 	    	}		        
     	    }
+	    else{
+		    	//Mega block to save the results of the previous call
+		    	var parameters=vals[0].vertices[0].parameters;//Get the parameters of the check function
+	    		if('persistResponse' in parameters){
+		    		console.log("persistResponse exists");
+		    		if('persistVariable' in args.check.parameters){
+		    			console.log("persistVariable exists");
+					if(typeof args.check.parameters.persistVariable!=undefined){
+						var sVname=args.check.parameters.persistVariable;
+			    			console.log("persistVariable refers to "+sVname);
+			    			console.log("persisting the response "+result.response+" to session.conversationData."+sVname);
+			    			session.conversationData[sVname]=result.response;
+			    			logThis(session.conversationData);
+					}
+					else{
+			    			console.log("persistVariable is undefined");
+		    			}
+		    		}
+		    		else{
+		    			console.log("persistVariable is missing");
+	    	    		}
+	    		}
+	    		else{
+	    			console.log("persistResponse is missing");
+    	   		}
+		    	
+		    	//And then the call to the next piece of the conversation
+		    	for(int i=0;i<vals[0].edges.length;i++){
+		   		var edge=vals[0].edges[i];
+		   		if(result.success==edge){
+			   		console.log("The return value of the function is "+result.success+" so calling the "+edge.type+" edge to "+edge._to+" node");
+			   		var parameters={'nodeID':edge._to};
+			   		session.beginDialog("MSBotFramework:/CheckPrereqs",parameters);
+		   		}
+	   		}
+	    }
     });
  }
 ]);

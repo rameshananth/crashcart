@@ -6,7 +6,9 @@ var db= require('arangojs')({
 			   });
 db.useBasicAuth('root',process.env.ARANGO_PASSWORD);
 db.useDatabase('fixit');
-db.listCollections().then((cols)=>console.log(cols),(err)=>console.error(err));
+//db.listCollections().then((cols)=>console.log(cols),(err)=>console.error(err));
+var inMemoryStorage=new builder.MemoryBotStorage();
+
 
 
 /*
@@ -36,6 +38,7 @@ var bot = new builder.UniversalBot(connector,function(session){
 
 //Set CHEEP's persistConversationData parameters
 bot.set('persistConversationData',false);
+bot.set('storage',inMemoryStorage);
 
 //Import the necessary libararies
 bot.library(require('./itsm/servicenow/helper').createLibrary());

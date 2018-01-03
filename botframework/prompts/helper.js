@@ -37,7 +37,7 @@ lib.dialog('/GetEntity',[
 		The entityName is passed on as an argument parameter: entityName
 		You can persist this variable by making it part of a checkPrereqs function
 		*/
-		var eVar=builder.EntityRecognizer.findEntity(args.conversationData.intent.entities, args.entityName);
+		var eVar=builder.EntityRecognizer.findEntity(session.conversationData.intent.entities, args.entityName);
 		if(eVar){
 			session.endDialogWithResult({response:eVar.entity,success:true});
 		}

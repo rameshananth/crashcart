@@ -1,7 +1,7 @@
 var builder=require('botbuilder');
 var lib=new builder.Library('MSBotFramework');
 const util=require('util');
-const debug=1;
+const debug=0;
 var aqlquery=require('arangojs').aqlQuery;
 var db= require('arangojs')({
 				database:"fixit",
@@ -126,7 +126,7 @@ lib.dialog('/CheckPrereqs',[
 			    args.check['parameters']['conversationData']=session.conversationData;
 			    //args.check[type]=to;
 			    console.log(args);
-			    session.dialogData.args=args;
+			    session.conversationData.args=args;
 			    session.save();
 			    session.beginDialog(args.check.name,args.check.parameters);
 			    console.log(session.dialogData);
